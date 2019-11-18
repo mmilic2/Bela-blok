@@ -1,0 +1,32 @@
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.form-check-inline #checkbox2{
+    margin-right: auto;
+    margin-left: 0.313rem;
+}
+
+
+
+.form-check-inline #checkbox1{
+    margin-right: -0.5rem;
+   
+}
+
+.form-check-inline #checkbox4{
+    margin-right: auto;
+    margin-left: 0.313rem;
+}
+
+
+
+.form-check-inline #checkbox3{
+    margin-right: -0.5rem;
+   
+}
