@@ -1,6 +1,6 @@
 var ukBodovi = 162;
-var mi;
-var vi;
+var mi = 0;
+var vi = 0;
 var ukupnoMi = 0;
 var ukupnoVi = 0;
 var igra = 1001;
@@ -8,19 +8,22 @@ var sumaMi = 0;
 var sumaVi = 0;
 
 function Bodovanje(){
-    mi = document.getElementById('bodovi1').value;
-    vi = document.getElementById('bodovi2').value;
+    mi = parseInt(document.getElementById('bodovi1').value);
+    vi = parseInt(document.getElementById('bodovi2').value);
     ZvanjeMi = parseInt(document.getElementById('zvanje1').value);
     ZvanjeVi = parseInt(document.getElementById('zvanje2').value);
     ukBodovi += +document.getElementById('zvanje1').value;
     ukBodovi += +document.getElementById('zvanje2').value;
+    
     if(isNaN(ZvanjeMi)){
         ZvanjeMi = 0;
-    }else if(isNaN(ZvanjeVi)){
+    }
+    if(isNaN(ZvanjeVi)){
         ZvanjeVi = 0;
     }
-   
 
+    mi += ZvanjeMi;
+    vi += ZvanjeVi;
     if(document.getElementById("checkbox1").checked == false && document.getElementById("checkbox2").checked == false){
         alert('Niste odabrali tko je zvao!');
     }
@@ -28,22 +31,34 @@ function Bodovanje(){
             if(mi <= ukBodovi/2){
                 document.getElementById('bodovi1').value = 0;
                 document.getElementById('bodovi2').value = ukBodovi;
+                ukupnoVi = ukBodovi;
+                ukupnoMi = 0;
             }else if(mi == 0){
                 document.getElementById('bodovi2').value = ukBodovi;
-                vi = ukBodovi;  
+                vi = ukBodovi; 
+                ukupnoVi = vi;
+                ukupnoMi = 0; 
             }else{
-                document.getElementById('bodovi2').value = (ukBodovi - mi) + ZvanjeVi;
+                document.getElementById('bodovi2').value = (ukBodovi - mi);
+                ukupnoVi = ukBodovi - mi;
+                ukupnoMi = ukBodovi - ukupnoVi;
             }
     }
     if(document.getElementById("checkbox2").checked == true){
             if(vi <= ukBodovi/2){
                 document.getElementById('bodovi2').value = 0;
                 document.getElementById('bodovi1').value = ukBodovi;
+                ukupnoMi = ukBodovi;
+                ukupnoVi = 0;
             }else if(vi == 0){
                 document.getElementById('bodovi1').value = ukBodovi;
-                mi = ukBodovi;  
+                mi = ukBodovi;
+                ukupnoMi = ukBodovi;
+                ukupnoVi = 0;  
             }else{
-                document.getElementById('bodovi1').value = (ukBodovi - vi) + ZvanjeMi;
+                document.getElementById('bodovi1').value = (ukBodovi - vi);
+                ukupnoMi = ukBodovi - vi;
+                ukupnoVi = ukBodovi - ukupnoMi;
             }
     }
     if(document.getElementById("checkbox3").checked == true){
@@ -53,11 +68,8 @@ function Bodovanje(){
         alert('Igra gotova, pobjedili ste Vi');
     }
    
-
-
-
-    ukupnoMi = ukBodovi - parseInt(document.getElementById('bodovi2').value);
-    ukupnoVi = ukBodovi - parseInt(document.getElementById('bodovi1').value);
+     //ukupnoMi = ukBodovi - parseInt(document.getElementById('bodovi2').value);
+    //ukupnoVi = ukBodovi - parseInt(document.getElementById('bodovi1').value);
     document.getElementById("ukupnoMi").innerHTML= "Mi: " + ukupnoMi;
     document.getElementById("ukupnoVi").innerHTML = "Vi: " + ukupnoVi;
     Rezultat(ukupnoMi, ukupnoVi);
@@ -78,6 +90,8 @@ function Bodovanje(){
     document.getElementById('bodovi2').value = "";
     document.getElementById('zvanje1').value = "";
     document.getElementById('zvanje2').value = "";
+    ukupnoVi = 0;
+    ukupnoMi = 0;
 }
     
     $(document).ready(function(){
