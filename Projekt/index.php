@@ -1,3 +1,5 @@
+<?php session_start()?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -89,7 +91,11 @@
       </div>
       <br>
       <div class="d-flex justify-content-center align-items-center container">
+      <?php  if(!isset($_SESSION['loggedin'])): ?>
+          <button disabled type="submit" class="btn btn-primary" onclick="Bodovanje()">Zapiši</button>
+      <?php  else: ?>
         <button type="submit" class="btn btn-primary" onclick="Bodovanje()">Zapiši</button>
+      <?php endif; ?>
       </div>
       <br>
       <div class="d-flex justify-content-center align-items-center container">
