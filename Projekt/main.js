@@ -1,6 +1,8 @@
 var ukBodovi = 162;
 var mi = 0;
 var vi = 0;
+var trenMi = 0;
+var trenVi = 0;
 var ukupnoMi = 0;
 var ukupnoVi = 0;
 var igra = 1001;
@@ -35,51 +37,57 @@ function Bodovanje(){
                     if(mi <= ukBodovi/2){
                         document.getElementById('bodovi1').value = 0;
                         document.getElementById('bodovi2').value = ukBodovi;
-                        ukupnoVi = ukBodovi;
-                        ukupnoMi = 0;
+                        trenVi = ukBodovi;
+                        trenMi = 0;
                     }else if(mi == 0){
                         document.getElementById('bodovi2').value = ukBodovi;
                         vi = ukBodovi; 
-                        ukupnoVi = vi;
-                        ukupnoMi = 0; 
+                        trenVi = vi;
+                        trenMi = 0; 
                     }else{
                         document.getElementById('bodovi2').value = (ukBodovi - mi);
-                        ukupnoVi = ukBodovi - mi;
-                        ukupnoMi = ukBodovi - ukupnoVi;
+                        trenVi = ukBodovi - mi;
+                        trenMi = ukBodovi - trenVi;
                     }
             }
             if(document.getElementById("checkbox2").checked == true){
                     if(vi <= ukBodovi/2){
                         document.getElementById('bodovi2').value = 0;
                         document.getElementById('bodovi1').value = ukBodovi;
-                        ukupnoMi = ukBodovi;
-                        ukupnoVi = 0;
+                        trenMi = ukBodovi;
+                        trenVi = 0;
                     }else if(vi == 0){
                         document.getElementById('bodovi1').value = ukBodovi;
                         mi = ukBodovi;
-                        ukupnoMi = ukBodovi;
-                        ukupnoVi = 0;  
+                        trenMi = ukBodovi;
+                        trenVi = 0;  
                     }else{
                         document.getElementById('bodovi1').value = (ukBodovi - vi);
-                        ukupnoMi = ukBodovi - vi;
-                        ukupnoVi = ukBodovi - ukupnoMi;
+                        trenMi = ukBodovi - vi;
+                        trenVi = ukBodovi - trenMi;
                     }
             }
             if(document.getElementById("checkbox3").checked == true){
                 alert('Igra gotova, pobjedili smo mi');
+                ukupnoMi = 0;
+                ukupnoVi = 0;
             }
             if(document.getElementById("checkbox4").checked == true){
                 alert('Igra gotova, pobjedili ste Vi');
+                ukupnoMi = 0;
+                ukupnoVi = 0;
             }
-        
+            ukupnoMi += trenMi;
+            ukupnoVi += trenVi;
+            
             //ukupnoMi = ukBodovi - parseInt(document.getElementById('bodovi2').value);
             //ukupnoVi = ukBodovi - parseInt(document.getElementById('bodovi1').value);
             document.getElementById("ukupnoMi").innerHTML= "Mi: " + ukupnoMi;
             document.getElementById("ukupnoVi").innerHTML = "Vi: " + ukupnoVi;
-            Rezultat(ukupnoMi, ukupnoVi);
+            Rezultat(trenMi, trenVi);
             igra -= ukBodovi;
-            sumaMi += ukupnoMi;
-            sumaVi += ukupnoVi;
+            sumaMi += trenMi;
+            sumaVi += trenVi;
             if(igra <= 0){
                 if(sumaMi > sumaVi){
                     alert('Pobjedili smo mi');
@@ -94,8 +102,8 @@ function Bodovanje(){
             document.getElementById('bodovi2').value = "";
             document.getElementById('zvanje1').value = "";
             document.getElementById('zvanje2').value = "";
-            ukupnoVi = 0;
-            ukupnoMi = 0;
+            trenMi = 0;
+            trenVi = 0;
         }
     }
 }
